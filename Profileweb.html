@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Sayo Sinta!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        nav {
+            background-color:#000080;
+            padding: 10px;
+        }
+
+        .navbar {
+            list-style-type: none;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .navbar li {
+            position: relative;
+        }
+
+        .navbar li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: block;
+        }
+
+        .navbar li a:hover {
+            background-color: #575757;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+             color: gold; 
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            
+        }
+
+        .dropdown-content a:hover {
+            background-color: #575757;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        header {
+            width: 100%;
+            height: 400px;
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        .header-image {
+            background-image: url('https://scontent.fmnl30-1.fna.fbcdn.net/v/t39.30808-6/461575091_893817405992393_2958975753164407155_n.jpg?stp=dst-jpg_p180x540&_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeF9dr2MDsJQkt8fVT4mtexzxFEgjrCGA1rEUSCOsIYDWhhIQnWQOO0uaQn-cHrymiatxEv4I7FukGjtBz7wk7xi&_nc_ohc=J9Kw5dkqWqkQ7kNvgEQldZL&_nc_ht=scontent.fmnl30-1.fna&_nc_gid=ACxRWEknRm6wjIg64UY-s4q&oh=00_AYBdmpRRbv-GoeZBu-XbIP-3dBL6uYGR85d1L6DlBkcCSg&oe=66FF56F9');
+            background-size: cover;
+            background-position: center;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            position: relative;
+        }
+
+        .header-text {
+            color: white;
+            text-align: left;
+            background: rgba(0, 0, 0, 0); 
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px; 
+            opacity: 0; 
+            transform: translateY(20px); 
+            animation: fadeInUp 2s ease forwards; 
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px); 
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0); 
+            }
+        }
+
+        .text-box {
+            background: rgba(255, 255, 255, 0.8);
+            color: black;
+            padding: 20px;
+            margin: 20px; 
+            border-radius: 10px; 
+            opacity: 0; 
+            transform: translateY(20px); 
+            animation: fadeInUp 1.5s ease forwards; 
+        }
+
+        .logo {
+            position: absolute;
+            top: 10px; 
+            right: 20px;
+            width: 40px; 
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover; 
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            .header-text h1 {
+                font-size: 2em;
+            }
+            .header-text p {
+                font-size: 1.2em;
+            }
+            .text-box {
+                margin: 10px; 
+            }
+        }
+
+        .box-container {
+            display: flex; 
+            justify-content: space-around; 
+            margin: 20px; 
+            flex-wrap: wrap; 
+            
+        }
+
+        .box {
+            background: #000080; 
+            color: white;
+            padding: 10px; 
+            margin: 10px;
+            border-radius: 10px; 
+            width: 30%; 
+            position: relative; 
+            cursor: pointer; 
+            overflow: hidden; 
+            opacity: 0; 
+            transform: translateY(20px); 
+            animation: fadeInUp 0.5s ease forwards; 
+            padding: 10px;
+        }
+
+        .box-content {
+            max-height: 200; 
+            transition: max-height 0.5s ease; 
+        }
+
+        .box-content.active {
+            max-height: 200px; 
+            transition: max-height 0.5s ease; 
+        }
+
+        .hover-text {
+            position: absolute; 
+            bottom: 0; 
+            left: 0; 
+            width: 100%; 
+            background: rgba(255, 255, 255, 0.8); 
+            color: black;
+            padding: 10px;
+            border-radius: 0 0 10px 10px; 
+        }
+
+        .box:hover .hover-text {
+            display: block; 
+        }
+
+        .list-item {
+            display: flex; 
+            align-items: center; 
+            opacity: 0; 
+            transform: translateY(10px); 
+            animation: fadeInUp 0.5s ease forwards; 
+            animation-delay: var(--delay); 
+            
+        }
+
+        .list-item img {
+            width: 40px; 
+            height: 40px;
+            margin-right: 10px; 
+            margin-bottom: 10px; 
+        }
+        
+        .box-container a {
+            color: white;
+            text-decoration: none; 
+        }
+
+        .box-container a:hover {
+            color: gold; 
+        }
+
+      
+
+        @media screen and (max-width: 768px) {
+            footer {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            footer div {
+                margin-bottom: 10px;
+            }
+
+            footer img {
+                margin: 0 auto;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            footer {
+                padding: 15px 10px;
+            }
+
+            footer div {
+                font-size: 14px;
+            }
+
+            footer img {
+                width: 80px;
+                height: 80px;
+            }
+        }
+      
+
+    </style>
+</head>
+<body>
+
+<nav>
+    <ul class="navbar">
+        <li class="dropdown">
+            <a href="#" class="dropbtn">Developers</a>
+            <div class="dropdown-content">
+                <a href="">Nateskii</a>
+                <a href="https://linktr.ee/HeizouKristo">HeizhouKristo</a>
+                <a href="https://linktr.ee/Heckler416">Heckler</a>
+                <a href="#">Pouya</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropbtn">Linkedin</a>
+            <div class="dropdown-content">
+                <a href="#">Saquitan</a>
+                <a href="https://www.linkedin.com/in/john-johan-ponteres-a3b9b432b/">Ponteres</a>
+                <a href="https://www.linkedin.com/in/patrick-emerson-dela-peña-463726329/">Dela Peña</a>
+                <a href="#">Go</a>
+            </div>
+        </li>
+        <li><a href="#">Socials</a></li>
+        <li><a href="#">About us</a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="header-image">
+        <div class="header-text">
+            <h1>Hello There!</h1>
+            <p>This simply is a little project that was made out of passion and fun.</p>
+         </div>
+        <img src="https://scontent.fmnl30-3.fna.fbcdn.net/v/t39.30808-6/461480594_893917532649047_3283549891329318428_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeF8ihpN64e8zRXN7Ygf3L48rfKl_qDRnJGt8qX-oNGckV1kzQfBheMDSFfuFFNlXQI4RjtjZ2floETilh_Lb3LL&_nc_ohc=QVvEJWVWXcUQ7kNvgGaKhij&_nc_ht=scontent.fmnl30-3.fna&_nc_gid=AGPsI4nSn74s4HQgAAxphC_&oh=00_AYAoJzuO7OkHuNRE1Q5Hyjm0bAuxQB0EwVr8xW_Wgd8kww&oe=66FF98A5" class="logo" alt="Logo">
+    </div>
+</header>
+
+<div class="text-box">
+    <p>This is a test website that we made for the fun of it. It's not fancy nor it is highly professionally made website.
+     <br>
+
+<br>
+This site is made for fun and the purpose of learning.</p>
+</div>
+
+<div class="box-container">
+    <div class="box" onclick="toggleContent(this)">
+        <h2>Favourite Games</h2>
+          <div class="box-content active">
+            <ul>
+                <li class="list-item" style="--delay: 0s;">
+                    <img src="https://play-lh.googleusercontent.com/cM6aszB0SawZNoAIPvtvy4xsfeFi5iXVBhZB57o-EGPWqE4pbyIUlKJzmdkH8hytuuQ" alt="Logo">
+                    <a href="https://hsr.hoyoverse.com/en-us/">Honkai: Star Rail</a>
+                </li>
+                <li class="list-item" style="--delay: 0.1s;">
+                    <img src="https://play-lh.googleusercontent.com/ameFGPYH-qhOSxdsSA_fA54I4Ch-eO8y7Pj4x6W6ejQkvKbhVjCehKlPerBY9X2L8ek=w240-h480-rw" alt="Logo">
+                    <a href="https://wutheringwaves.kurogames.com/en/main/">Wuthering Waves</a>
+                </li>
+                <li class="list-item" style="--delay: 0.2s;">
+                    <img src="https://i.pinimg.com/736x/b3/30/8c/b3308cb7336e7f821fed814690d1be6e.jpg" alt="Logo">
+                    <a href="https://genshin.hoyoverse.com/en/">Genshin Impact</a>
+                     <li class="list-item" style="--delay: 0.2s;">
+                    <img src="https://preview.redd.it/why-is-anby-the-face-of-zzz-no-hate-i-am-curious-she-is-v0-i7e9gi7wbhcd1.png?auto=webp&s=710bd6620d44a567ceb46a32af38ac48da8f294a" alt="Logo">
+                    <a href="https://zenless.hoyoverse.com/en-us/">Zenless Zone Zero</a>
+                </li>
+                </li>
+            </ul>
+        </div>
+       
+    </div>
+    <div class="box" onclick="toggleContent(this)">
+        <h2>Favourite Charcters</h2>
+        <div class="box-content">
+            <ul>
+                <li class="list-item" style="--delay: 0s;">
+                    <img src="https://i.pinimg.com/originals/64/75/be/6475be4373aa1966c1053744eb90c4dd.jpg" alt="Logo">
+                    <a href="https://www.example.com">Changli</a>
+                </li>
+                <li class="list-item" style="--delay: 0.1s;">
+                    <img src="https://i2.wp.com/genshinbuilds.aipurrjects.com/genshin/characters/neuvillette/image.png?strip=all&quality=100" alt="Logo">
+                    <a href="https://www.example.com">Neuvillette</a>
+                </li>
+                <li class="list-item" style="--delay: 0.2s;">
+                    <img src="https://i2.wp.com/genshinbuilds.aipurrjects.com/hsr/characters/kafka/icon_2.png?strip=all&quality=100&w=384" alt="Logo">
+                    <a href="https://www.example.com">Kafka</a>
+                </li>
+                <li class="list-item" style="--delay: 0.2s;">
+                    <img src="https://genshinlab.com/wp-content/uploads/Ellen.png" alt="Logo">
+                    <a href="https://www.example.com">Ellen Joe</a>
+                </li>
+            </ul>
+        </div>
+     
+    </div>
+    <div class="box" onclick="toggleContent(this)">
+        <h2>Campus Website</h2>
+        <div class="box-content">
+            <ul>
+                <li class="list-item" style="--delay: 0s;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/68/PUP.png" alt="Logo">
+                    <a href="https://www.pup.edu.ph">PUP</a>
+                </li>
+                <li class="list-item" style="--delay: 0.1s;">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/7/75/Universidad_de_Manila_seal.png" alt="Logo">
+                    <a href="https://udmwebsite.udm.edu.ph">UDM</a>
+                </li>
+                <li class="list-item" style="--delay: 0.2s;">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/6/62/FEU_Tech_official_seal.png" alt="Logo">
+                    <a href="https://www.feutech.edu.ph">FEU</a>
+                </li>
+            </ul>
+        </div>
+      
+    </div>
+</div>
+
+<footer style="display: flex; justify-content: space-between; align-items: center; background-color: #000080; color: white; padding: 10px 20px; height: 100px; width: 100%;">
+    <div style="flex: 1;">
+        <h3>Contact us at:</h3>
+        <h4>patrickb.dpn@gmail.com</h4><br>
+        <p>This site is not in any way directly connected to the aforementioned campuses. This is simply a website made by its students as a hobby.</p>
+        <p>There are no monetizations on this website.</p>
+    </div>
+    <img src="https://scontent.fmnl30-3.fna.fbcdn.net/v/t39.30808-6/461480594_893917532649047_3283549891329318428_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeF8ihpN64e8zRXN7Ygf3L48rfKl_qDRnJGt8qX-oNGckV1kzQfBheMDSFfuFFNlXQI4RjtjZ2floETilh_Lb3LL&_nc_ohc=QVvEJWVWXcUQ7kNvgGaKhij&_nc_ht=scontent.fmnl30-3.fna&_nc_gid=AGPsI4nSn74s4HQgAAxphC_&oh=00_AYAoJzuO7OkHuNRE1Q5Hyjm0bAuxQB0EwVr8xW_Wgd8kww&oe=66FF98A5" alt="Footer Image" style="border-radius: 10px; height: 80px; width: auto;">
+</footer>
+
+
+
+<script>
+    function toggleContent(clickedBox) {
+     
+        const boxes = document.querySelectorAll('.box');
+
+        boxes.forEach(box => {
+            const content = box.querySelector('.box-content');
+            const hoverText = box.querySelector('.hover-text');
+
+            // Ensure other boxes are closed when another one is clicked
+            if (box !== clickedBox) {
+                content.classList.remove('active');
+                if (hoverText) {
+                    hoverText.style.display = 'block'; // Show hover text for unclicked boxes
+                }
+            } else {
+                const isActive = content.classList.toggle('active');
+                if (hoverText) {
+                    hoverText.style.display = isActive ? 'none' : 'block'; // Toggle hover text on clicked box
+                }
+            }
+        });
+    }
+</script>
+
+
+
+</body>
+</html>
